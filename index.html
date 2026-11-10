@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>105 Verbos · Lista Oficial de Inglés · 1.º ESO | Aula Next ESO</title>
+
+  <!-- Tailwind CSS (CDN - Requiere conexión a Internet) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 18 & ReactDOM 18 (CDN - Requiere conexión a Internet) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone para JSX en navegador -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Tipografía Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            an: {
+              navy: '#0F2547',
+              blue: '#0055A5',
+              green: '#28A86B',
+              orange: '#F08519',
+              light: '#F8FAFC',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --an-navy: #0F2547;
+      --an-blue: #0055A5;
+      --an-green: #28A86B;
+      --an-orange: #F08519;
+      --an-bg: #F8FAFC;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--an-bg);
+      color: var(--an-navy);
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    html.dark body {
+      background-color: #09152B;
+      color: #F1F5F9;
+    }
+
+    /* Sistema de giro 3D compatible con móviles y escritorio (sin recortar alturas) */
+    .flip-perspective {
+      perspective: 1200px;
+    }
+
+    .flip-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .flip-inner.is-flipped {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      grid-area: 1 / 1 / 2 / 2;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+
+    .flip-back {
+      transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
+    }
+
+    /* Desactivar eventos de puntero en la cara oculta para evitar clics fantasma en iOS/Android */
+    .flip-inner:not(.is-flipped) .flip-back {
+      pointer-events: none;
+    }
+    .flip-inner.is-flipped .flip-front {
+      pointer-events: none;
+    }
+
+    /* Fondos corporativos elegantes para el anverso y reverso */
+    .an-front-surface {
+      background: linear-gradient(155deg, #FFFFFF 0%, #F2F7FD 55%, #E3EFFB 100%);
+    }
+    html.dark .an-front-surface {
+      background: linear-gradient(155deg, #13284C 0%, #0F2140 60%, #16325E 100%);
+    }
+
+    .an-back-surface {
+      background: linear-gradient(165deg, #FFFFFF 0%, #F8FAFC 100%);
+    }
+    html.dark .an-back-surface {
+      background: linear-gradient(165deg, #112445 0%, #0D1C36 100%);
+    }
+
+    /* Sombra corporativa elegante */
+    .an-card-shadow {
+      box-shadow: 0 10px 30px -5px rgba(15, 37, 71, 0.08), 0 4px 12px -2px rgba(0, 85, 165, 0.05);
+    }
+    html.dark .an-card-shadow {
+      box-shadow: 0 12px 30px -6px rgba(3, 9, 20, 0.55), 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+    }
+
+    .an-card-shadow-focus {
+      box-shadow: 0 20px 45px -10px rgba(15, 37, 71, 0.14), 0 8px 20px -4px rgba(0, 85, 165, 0.09);
+    }
+    html.dark .an-card-shadow-focus {
+      box-shadow: 0 22px 50px -10px rgba(2, 6, 16, 0.7), 0 8px 22px -4px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Scrollbar sutil para selector horizontal en pantallas muy pequeñas */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#0055A5] selection:text-white">
+  <div id="root" class="flex-grow flex flex-col"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+    /**
+     * ============================================================================
+     * 1. CONFIGURACIÓN CORPORATIVA Y CLAVES DE ALMACENAMIENTO (AULA NEXT ESO)
+     * ============================================================================
+     */
+    const BRAND_CONFIG = {
+      name: "Aula Next ESO",
+      courseTitle: "105 VERBOS · LISTA OFICIAL DE INGLÉS",
+      phone: "602 02 61 19",
+      phoneHref: "tel:+34602026119",
+      email: "aulakids513@gmail.com",
+      emailHref: "mailto:aulakids513@gmail.com",
+      logoSrc: "logo_aula_next.png"
+    };
+
+    // Contraseña exclusiva de acceso en cliente (no representa seguridad de servidor)
+    const ACCESS_KEY_REQUIRED = "Aul@NextnavI";
+
+    // Claves de localStorage independientes y exclusivas para Aula Next ESO
+    const STORAGE_KEYS = {
+      UNLOCKED: "aulanext_eso_95verbs_unlocked_v1",
+      DIFFICULT_V2: "aulanext_eso_105verbs_difficult_v2",
+      LEGACY_DIFFICULT_V1: "aulanext_eso_95verbs_difficult_v1",
+      THEME: "aulanext_eso_95verbs_theme_v1"
+    };
+
+    // Mapa canónico del orden antiguo (1..95) para migrar con total seguridad las marcas de dificultad previas a su nuevo UID estable
+    const LEGACY_95_ID_TO_UID = Object.freeze({
+      1: "be__was/were__been",
+      2: "beat__beat__beaten",
+      3: "become__became__become",
+      4: "begin__began__begun",
+      5: "bend__bent__bent",
+      6: "bet__bet__bet",
+      7: "bite__bit__bitten",
+      8: "bleed__bled__bled",
+      9: "blow__blew__blown",
+      10: "break__broke__broken",
+      11: "bring__brought__brought",
+      12: "build__built__built",
+      13: "burn__burnt/burned__burnt/burned",
+      14: "buy__bought__bought",
+      15: "catch__caught__caught",
+      16: "choose__chose__chosen",
+      17: "come__came__come",
+      18: "cost__cost__cost",
+      19: "cut__cut__cut",
+      20: "dig__dug__dug",
+      21: "do__did__done",
+      22: "draw__drew__drawn",
+      23: "dream__dreamt / dreamed__dreamt/dreamed",
+      24: "drink__drank__drunk",
+      25: "drive__drove__driven",
+      26: "eat__ate__eaten",
+      27: "fall__fell__fallen",
+      28: "feed__fed__fed",
+      29: "feel__felt__felt",
+      30: "fight__fought__fought",
+      31: "find__found__found",
+      32: "fly__flew__flown",
+      33: "freeze__froze__frozen",
+      34: "get__got__got",
+      35: "give__gave__given",
+      36: "go__went__gone",
+      37: "grow__grew__grown",
+      38: "hang__hung__hung",
+      39: "have__had__had",
+      40: "hear__heard__heard",
+      41: "hide__hid__hidden",
+      42: "hit__hit__hit",
+      43: "hold__held__held",
+      44: "hurt__hurt__hurt",
+      45: "keep__kept__kept",
+      46: "know__knew__known",
+      47: "lay__laid__laid",
+      48: "lead__led__led",
+      49: "learn__learnt / learned__learnt/learned",
+      50: "leave__left__left",
+      51: "lend__lent__lent",
+      52: "let__let__let",
+      53: "light__lit__lit",
+      54: "lose__lost__lost",
+      55: "make__made__made",
+      56: "mean__meant__meant",
+      57: "meet__met__met",
+      58: "overcome__overcame__overcome",
+      59: "pay__paid__paid",
+      60: "put__put__put",
+      61: "quit__quit__quit",
+      62: "read__read__read",
+      63: "ride__rode__ridden",
+      64: "ring__rang__rung",
+      65: "rise__rose__risen",
+      66: "run__ran__run",
+      67: "say__said__said",
+      68: "see__saw__seen",
+      69: "sell__sold__sold",
+      70: "send__sent__sent",
+      71: "shake__shook__shaken",
+      72: "shine__shone__shone",
+      73: "shoot__shot__shot",
+      74: "show__showed__shown",
+      75: "shut__shut__shut",
+      76: "sing__sang__sung",
+      77: "sink__sank__sunk",
+      78: "sit__sat__sat",
+      79: "sleep__slept__slept",
+      80: "spell__spelt/spelled__spelt/spelled",
+      81: "spend__spent__spent",
+      82: "stand__stood__stood",
+      83: "steal__stole__stolen",
+      84: "swim__swam__swum",
+      85: "take__took__taken",
+      86: "teach__taught__taught",
+      87: "tear__tore__torn",
+      88: "tell__told__told",
+      89: "think__thought__thought",
+      90: "throw__threw__thrown",
+      91: "understand__understood__understood",
+      92: "wake up__woke up__woken up",
+      93: "wear__wore__worn",
+      94: "win__won__won",
+      95: "write__wrote__written"
+    });
+
+    /**
+     * ============================================================================
+     * 2. BASE DE DATOS OFICIAL E INMUTABLE: 105 VERBOS · LISTA OFICIAL DE INGLÉS
+     * Fuente única autorizada: PDF Aula Next ESO (Bloques 1 al 5, 21 verbos/bloque)
+     * ============================================================================
+     */
+    const RAW_VERBS_105 = [
+      // BLOQUE 1: Verbos 1–21
+      { id: 1,   block: 1, present: "be",         past: "was/were",         participle: "been",           es: "ser/estar",                        va: "ser / estar" },
+      { id: 2,   block: 1, present: "beat",       past: "beat",             participle: "beaten",         es: "golpear / vencer",                 va: "colpejar / véncer" },
+      { id: 3,   block: 1, present: "become",     past: "became",           participle: "become",         es: "convertirse en",                   va: "convertir-se en" },
+      { id: 4,   block: 1, present: "begin",      past: "began",            participle: "begun",          es: "empezar/comenzar",                 va: "començar" },
+      { id: 5,   block: 1, present: "bend",       past: "bent",             participle: "bent",           es: "doblar",                           va: "doblegar" },
+      { id: 6,   block: 1, present: "bet",        past: "bet",              participle: "bet",            es: "apostar",                          va: "apostar" },
+      { id: 7,   block: 1, present: "bite",       past: "bit",              participle: "bitten",         es: "morder",                           va: "mossegar" },
+      { id: 8,   block: 1, present: "bleed",      past: "bled",             participle: "bled",           es: "sangrar",                          va: "sagnar" },
+      { id: 9,   block: 1, present: "blow",       past: "blew",             participle: "blown",          es: "soplar",                           va: "bufar" },
+      { id: 10,  block: 1, present: "break",      past: "broke",            participle: "broken",         es: "romper",                           va: "trencar" },
+      { id: 11,  block: 1, present: "bring",      past: "brought",          participle: "brought",        es: "traer / llevar",                   va: "portar" },
+      { id: 12,  block: 1, present: "build",      past: "built",            participle: "built",          es: "construir",                        va: "construir" },
+      { id: 13,  block: 1, present: "burn",       past: "burnt/burned",     participle: "burnt/burned",   es: "quemar",                           va: "cremar" },
+      { id: 14,  block: 1, present: "buy",        past: "bought",           participle: "bought",         es: "comprar",                          va: "comprar" },
+      { id: 15,  block: 1, present: "catch",      past: "caught",           participle: "caught",         es: "coger / atrapar",                  va: "agafar" },
+      { id: 16,  block: 1, present: "choose",     past: "chose",            participle: "chosen",         es: "elegir",                           va: "triar" },
+      { id: 17,  block: 1, present: "come",       past: "came",             participle: "come",           es: "venir",                            va: "vindre" },
+      { id: 18,  block: 1, present: "cost",       past: "cost",             participle: "cost",           es: "costar",                           va: "costar" },
+      { id: 19,  block: 1, present: "cut",        past: "cut",              participle: "cut",            es: "cortar",                           va: "tallar" },
+      { id: 20,  block: 1, present: "dig",        past: "dug",              participle: "dug",            es: "cavar",                            va: "cavar" },
+      { id: 21,  block: 1, present: "do",         past: "did",              participle: "done",           es: "hacer",                            va: "fer" },
+
+      // BLOQUE 2: Verbos 22–42
+      { id: 22,  block: 2, present: "draw",       past: "drew",             participle: "drawn",          es: "dibujar",                          va: "dibuixar" },
+      { id: 23,  block: 2, present: "dream",      past: "dreamt / dreamed", participle: "dreamt/dreamed", es: "soñar",                            va: "somiar" },
+      { id: 24,  block: 2, present: "drink",      past: "drank",            participle: "drunk",          es: "beber",                            va: "beure" },
+      { id: 25,  block: 2, present: "drive",      past: "drove",            participle: "driven",         es: "conducir",                         va: "conduir" },
+      { id: 26,  block: 2, present: "eat",        past: "ate",              participle: "eaten",          es: "comer",                            va: "menjar" },
+      { id: 27,  block: 2, present: "fall",       past: "fell",             participle: "fallen",         es: "caer",                             va: "caure" },
+      { id: 28,  block: 2, present: "feed",       past: "fed",              participle: "fed",            es: "alimentar",                        va: "alimentar" },
+      { id: 29,  block: 2, present: "feel",       past: "felt",             participle: "felt",           es: "sentir",                           va: "sentir" },
+      { id: 30,  block: 2, present: "fight",      past: "fought",           participle: "fought",         es: "luchar / pelear",                  va: "lluitar" },
+      { id: 31,  block: 2, present: "find",       past: "found",            participle: "found",          es: "encontrar",                        va: "trobar" },
+      { id: 32,  block: 2, present: "fly",        past: "flew",             participle: "flown",          es: "volar",                            va: "volar" },
+      { id: 33,  block: 2, present: "forget",     past: "forgot",           participle: "forgotten",      es: "olvidar",                          va: "oblidar" },
+      { id: 34,  block: 2, present: "forgive",    past: "forgave",          participle: "forgiven",       es: "perdonar",                         va: "perdonar" },
+      { id: 35,  block: 2, present: "freeze",     past: "froze",            participle: "frozen",         es: "congelar",                         va: "congelar" },
+      { id: 36,  block: 2, present: "get",        past: "got",              participle: "got",            es: "obtener / conseguir",              va: "obtindre / aconseguir" },
+      { id: 37,  block: 2, present: "give",       past: "gave",             participle: "given",          es: "dar",                              va: "donar" },
+      { id: 38,  block: 2, present: "go",         past: "went",             participle: "gone",           es: "ir",                               va: "anar" },
+      { id: 39,  block: 2, present: "grow",       past: "grew",             participle: "grown",          es: "crecer",                           va: "créixer" },
+      { id: 40,  block: 2, present: "hang",       past: "hung",             participle: "hung",           es: "colgar",                           va: "penjar" },
+      { id: 41,  block: 2, present: "have",       past: "had",              participle: "had",            es: "tener",                            va: "tindre" },
+      { id: 42,  block: 2, present: "hear",       past: "heard",            participle: "heard",          es: "oír",                              va: "sentir / oir" },
+
+      // BLOQUE 3: Verbos 43–63
+      { id: 43,  block: 3, present: "hide",       past: "hid",              participle: "hidden",         es: "esconder",                         va: "amagar" },
+      { id: 44,  block: 3, present: "hit",        past: "hit",              participle: "hit",            es: "golpear",                          va: "colpejar" },
+      { id: 45,  block: 3, present: "hold",       past: "held",             participle: "held",           es: "sujetar / sostener",               va: "sostindre" },
+      { id: 46,  block: 3, present: "hurt",       past: "hurt",             participle: "hurt",           es: "hacer daño / herir",               va: "fer mal/ferir" },
+      { id: 47,  block: 3, present: "keep",       past: "kept",             participle: "kept",           es: "guardar",                          va: "guardar" },
+      { id: 48,  block: 3, present: "know",       past: "knew",             participle: "known",          es: "saber/conocer",                    va: "saber / conéixer" },
+      { id: 49,  block: 3, present: "lay",        past: "laid",             participle: "laid",           es: "poner / colocar",                  va: "posar/col·locar" },
+      { id: 50,  block: 3, present: "lead",       past: "led",              participle: "led",            es: "dirigir / guiar",                  va: "dirigir/guiar" },
+      { id: 51,  block: 3, present: "learn",      past: "learnt / learned", participle: "learnt/learned", es: "aprender",                         va: "aprendre" },
+      { id: 52,  block: 3, present: "leave",      past: "left",             participle: "left",           es: "dejar / irse",                     va: "deixar / anar-se'n" },
+      { id: 53,  block: 3, present: "lend",       past: "lent",             participle: "lent",           es: "prestar",                          va: "prestar" },
+      { id: 54,  block: 3, present: "let",        past: "let",              participle: "let",            es: "permitir / dejar",                 va: "permetre / deixar" },
+      { id: 55,  block: 3, present: "lie",        past: "lay",              participle: "lain",           es: "estar tumbado / tumbarse",         va: "estar gitat/gitar-se" },
+      { id: 56,  block: 3, present: "lie",        past: "lied",             participle: "lied",           es: "mentir",                           va: "mentir", note: "verbo regular" },
+      { id: 57,  block: 3, present: "light",      past: "lit",              participle: "lit",            es: "encender",                         va: "encendre" },
+      { id: 58,  block: 3, present: "lose",       past: "lost",             participle: "lost",           es: "perder",                           va: "perdre" },
+      { id: 59,  block: 3, present: "make",       past: "made",             participle: "made",           es: "hacer/fabricar",                   va: "fer/fabricar" },
+      { id: 60,  block: 3, present: "mean",       past: "meant",            participle: "meant",          es: "significar",                       va: "significar" },
+      { id: 61,  block: 3, present: "meet",       past: "met",              participle: "met",            es: "conocer / quedar con",             va: "conéixer / quedar amb" },
+      { id: 62,  block: 3, present: "overcome",   past: "overcame",         participle: "overcome",       es: "superar",                          va: "superar" },
+      { id: 63,  block: 3, present: "pay",        past: "paid",             participle: "paid",           es: "pagar",                            va: "pagar" },
+
+      // BLOQUE 4: Verbos 64–84
+      { id: 64,  block: 4, present: "put",        past: "put",              participle: "put",            es: "poner",                            va: "posar" },
+      { id: 65,  block: 4, present: "quit",       past: "quit",             participle: "quit",           es: "dejar / abandonar",                va: "deixar / abandonar" },
+      { id: 66,  block: 4, present: "read",       past: "read",             participle: "read",           es: "leer",                             va: "llegir" },
+      { id: 67,  block: 4, present: "ride",       past: "rode",             participle: "ridden",         es: "montar (en bicicleta / a caballo)",va: "muntar (en bicicleta / a cavall)" },
+      { id: 68,  block: 4, present: "ring",       past: "rang",             participle: "rung",           es: "sonar (el teléfono)",              va: "sonar (el telèfon)" },
+      { id: 69,  block: 4, present: "rise",       past: "rose",             participle: "risen",          es: "levantarse / subir",               va: "alçar-se / pujar" },
+      { id: 70,  block: 4, present: "run",        past: "ran",              participle: "run",            es: "correr",                           va: "córrer" },
+      { id: 71,  block: 4, present: "say",        past: "said",             participle: "said",           es: "decir",                            va: "dir" },
+      { id: 72,  block: 4, present: "see",        past: "saw",              participle: "seen",           es: "ver",                              va: "veure" },
+      { id: 73,  block: 4, present: "sell",       past: "sold",             participle: "sold",           es: "vender",                           va: "vendre" },
+      { id: 74,  block: 4, present: "send",       past: "sent",             participle: "sent",           es: "enviar",                           va: "enviar" },
+      { id: 75,  block: 4, present: "set",        past: "set",              participle: "set",            es: "poner/ establecer",                va: "posar / establir" },
+      { id: 76,  block: 4, present: "shake",      past: "shook",            participle: "shaken",         es: "sacudir / agitar",                 va: "sacsejar / agitar" },
+      { id: 77,  block: 4, present: "shine",      past: "shone",            participle: "shone",          es: "brillar",                          va: "brillar" },
+      { id: 78,  block: 4, present: "shoot",      past: "shot",             participle: "shot",           es: "disparar",                         va: "disparar" },
+      { id: 79,  block: 4, present: "show",       past: "showed",           participle: "shown",          es: "mostrar",                          va: "mostrar" },
+      { id: 80,  block: 4, present: "shut",       past: "shut",             participle: "shut",           es: "cerrar",                           va: "tancar" },
+      { id: 81,  block: 4, present: "sing",       past: "sang",             participle: "sung",           es: "cantar",                           va: "cantar" },
+      { id: 82,  block: 4, present: "sink",       past: "sank",             participle: "sunk",           es: "hundirse",                         va: "afonar-se" },
+      { id: 83,  block: 4, present: "sit",        past: "sat",              participle: "sat",            es: "sentarse",                         va: "seure" },
+      { id: 84,  block: 4, present: "sleep",      past: "slept",            participle: "slept",          es: "dormir",                           va: "dormir" },
+
+      // BLOQUE 5: Verbos 85–105
+      { id: 85,  block: 5, present: "smell",      past: "smelt/smelled",    participle: "smelt/smelled",  es: "oler",                             va: "olorar / fer olor" },
+      { id: 86,  block: 5, present: "speak",      past: "spoke",            participle: "spoken",         es: "hablar",                           va: "parlar" },
+      { id: 87,  block: 5, present: "spell",      past: "spelt/spelled",    participle: "spelt/spelled",  es: "deletrear",                        va: "lletrejar" },
+      { id: 88,  block: 5, present: "spend",      past: "spent",            participle: "spent",          es: "gastar / pasar tiempo",            va: "gastar / passar temps" },
+      { id: 89,  block: 5, present: "stand",      past: "stood",            participle: "stood",          es: "estar de pie",                     va: "estar dret" },
+      { id: 90,  block: 5, present: "steal",      past: "stole",            participle: "stolen",         es: "robar",                            va: "robar" },
+      { id: 91,  block: 5, present: "stick",      past: "stuck",            participle: "stuck",          es: "pegar / clavar",                   va: "apegar / clavar" },
+      { id: 92,  block: 5, present: "sting",      past: "stung",            participle: "stung",          es: "picar (un insecto)",               va: "picar (un insecte)" },
+      { id: 93,  block: 5, present: "sweep",      past: "swept",            participle: "swept",          es: "barrer",                           va: "agranar" },
+      { id: 94,  block: 5, present: "swim",       past: "swam",             participle: "swum",           es: "nadar",                            va: "nadar" },
+      { id: 95,  block: 5, present: "take",       past: "took",             participle: "taken",          es: "coger / tomar",                    va: "agafar/ prendre" },
+      { id: 96,  block: 5, present: "teach",      past: "taught",           participle: "taught",         es: "enseñar",                          va: "ensenyar" },
+      { id: 97,  block: 5, present: "tear",       past: "tore",             participle: "torn",           es: "rasgar",                           va: "esgarrar" },
+      { id: 98,  block: 5, present: "tell",       past: "told",             participle: "told",           es: "contar / decir",                   va: "contar / dir" },
+      { id: 99,  block: 5, present: "think",      past: "thought",          participle: "thought",        es: "pensar",                           va: "pensar" },
+      { id: 100, block: 5, present: "throw",      past: "threw",            participle: "thrown",         es: "lanzar",                           va: "llançar" },
+      { id: 101, block: 5, present: "understand", past: "understood",       participle: "understood",     es: "entender",                         va: "entendre" },
+      { id: 102, block: 5, present: "wake up",    past: "woke up",          participle: "woken up",       es: "despertarse",                      va: "despertar-se" },
+      { id: 103, block: 5, present: "wear",       past: "wore",             participle: "worn",           es: "llevar puesto (ropa)",             va: "portar (roba)" },
+      { id: 104, block: 5, present: "win",        past: "won",              participle: "won",            es: "ganar",                            va: "guanyar" },
+      { id: 105, block: 5, present: "write",      past: "wrote",            participle: "written",        es: "escribir",                         va: "escriure" }
+    ];
+
+    // Cada registro recibe un identificador estable `uid` basado en su infinitivo y conjugación (`present__past__participle`)
+    const VERBS_DATA = Object.freeze(
+      RAW_VERBS_105.map(v =>
+        Object.freeze({
+          ...v,
+          uid: `${v.present}__${v.past}__${v.participle}`
+        })
+      )
+    );
+
+    /**
+     * ============================================================================
+     * 3. VALIDADOR AUTOMÁTICO DE INTEGRIDAD ACADÉMICA Y CORRESPONDENCIA CON PDF
+     * ============================================================================
+     */
+    const runAcademicIntegrityCheck = (dataset) => {
+      const errors = [];
+
+      // 1. Exactamente 105 entradas
+      if (!Array.isArray(dataset) || dataset.length !== 105) {
+        errors.push(`Error de longitud: se esperaban 105 entradas, se encontraron ${dataset?.length || 0}.`);
+      }
+
+      // Matriz canónica completa de verificación fila por fila contra el PDF oficial de 105 verbos
+      const CANONICAL_SIGNATURES = [
+        "1|1|be|was/were|been|ser/estar|ser / estar|",
+        "2|1|beat|beat|beaten|golpear / vencer|colpejar / véncer|",
+        "3|1|become|became|become|convertirse en|convertir-se en|",
+        "4|1|begin|began|begun|empezar/comenzar|començar|",
+        "5|1|bend|bent|bent|doblar|doblegar|",
+        "6|1|bet|bet|bet|apostar|apostar|",
+        "7|1|bite|bit|bitten|morder|mossegar|",
+        "8|1|bleed|bled|bled|sangrar|sagnar|",
+        "9|1|blow|blew|blown|soplar|bufar|",
+        "10|1|break|broke|broken|romper|trencar|",
+        "11|1|bring|brought|brought|traer / llevar|portar|",
+        "12|1|build|built|built|construir|construir|",
+        "13|1|burn|burnt/burned|burnt/burned|quemar|cremar|",
+        "14|1|buy|bought|bought|comprar|comprar|",
+        "15|1|catch|caught|caught|coger / atrapar|agafar|",
+        "16|1|choose|chose|chosen|elegir|triar|",
+        "17|1|come|came|come|venir|vindre|",
+        "18|1|cost|cost|cost|costar|costar|",
+        "19|1|cut|cut|cut|cortar|tallar|",
+        "20|1|dig|dug|dug|cavar|cavar|",
+        "21|1|do|did|done|hacer|fer|",
+        "22|2|draw|drew|drawn|dibujar|dibuixar|",
+        "23|2|dream|dreamt / dreamed|dreamt/dreamed|soñar|somiar|",
+        "24|2|drink|drank|drunk|beber|beure|",
+        "25|2|drive|drove|driven|conducir|conduir|",
+        "26|2|eat|ate|eaten|comer|menjar|",
+        "27|2|fall|fell|fallen|caer|caure|",
+        "28|2|feed|fed|fed|alimentar|alimentar|",
+        "29|2|feel|felt|felt|sentir|sentir|",
+        "30|2|fight|fought|fought|luchar / pelear|lluitar|",
+        "31|2|find|found|found|encontrar|trobar|",
+        "32|2|fly|flew|flown|volar|volar|",
+        "33|2|forget|forgot|forgotten|olvidar|oblidar|",
+        "34|2|forgive|forgave|forgiven|perdonar|perdonar|",
+        "35|2|freeze|froze|frozen|congelar|congelar|",
+        "36|2|get|got|got|obtener / conseguir|obtindre / aconseguir|",
+        "37|2|give|gave|given|dar|donar|",
+        "38|2|go|went|gone|ir|anar|",
+        "39|2|grow|grew|grown|crecer|créixer|",
+        "40|2|hang|hung|hung|colgar|penjar|",
+        "41|2|have|had|had|tener|tindre|",
+        "42|2|hear|heard|heard|oír|sentir / oir|",
+        "43|3|hide|hid|hidden|esconder|amagar|",
+        "44|3|hit|hit|hit|golpear|colpejar|",
+        "45|3|hold|held|held|sujetar / sostener|sostindre|",
+        "46|3|hurt|hurt|hurt|hacer daño / herir|fer mal/ferir|",
+        "47|3|keep|kept|kept|guardar|guardar|",
+        "48|3|know|knew|known|saber/conocer|saber / conéixer|",
+        "49|3|lay|laid|laid|poner / colocar|posar/col·locar|",
+        "50|3|lead|led|led|dirigir / guiar|dirigir/guiar|",
+        "51|3|learn|learnt / learned|learnt/learned|aprender|aprendre|",
+        "52|3|leave|left|left|dejar / irse|deixar / anar-se'n|",
+        "53|3|lend|lent|lent|prestar|prestar|",
+        "54|3|let|let|let|permitir / dejar|permetre / deixar|",
+        "55|3|lie|lay|lain|estar tumbado / tumbarse|estar gitat/gitar-se|",
+        "56|3|lie|lied|lied|mentir|mentir|verbo regular",
+        "57|3|light|lit|lit|encender|encendre|",
+        "58|3|lose|lost|lost|perder|perdre|",
+        "59|3|make|made|made|hacer/fabricar|fer/fabricar|",
+        "60|3|mean|meant|meant|significar|significar|",
+        "61|3|meet|met|met|conocer / quedar con|conéixer / quedar amb|",
+        "62|3|overcome|overcame|overcome|superar|superar|",
+        "63|3|pay|paid|paid|pagar|pagar|",
+        "64|4|put|put|put|poner|posar|",
+        "65|4|quit|quit|quit|dejar / abandonar|deixar / abandonar|",
+        "66|4|read|read|read|leer|llegir|",
+        "67|4|ride|rode|ridden|montar (en bicicleta / a caballo)|muntar (en bicicleta / a cavall)|",
+        "68|4|ring|rang|rung|sonar (el teléfono)|sonar (el telèfon)|",
+        "69|4|rise|rose|risen|levantarse / subir|alçar-se / pujar|",
+        "70|4|run|ran|run|correr|córrer|",
+        "71|4|say|said|said|decir|dir|",
+        "72|4|see|saw|seen|ver|veure|",
+        "73|4|sell|sold|sold|vender|vendre|",
+        "74|4|send|sent|sent|enviar|enviar|",
+        "75|4|set|set|set|poner/ establecer|posar / establir|",
+        "76|4|shake|shook|shaken|sacudir / agitar|sacsejar / agitar|",
+        "77|4|shine|shone|shone|brillar|brillar|",
+        "78|4|shoot|shot|shot|disparar|disparar|",
+        "79|4|show|showed|shown|mostrar|mostrar|",
+        "80|4|shut|shut|shut|cerrar|tancar|",
+        "81|4|sing|sang|sung|cantar|cantar|",
+        "82|4|sink|sank|sunk|hundirse|afonar-se|",
+        "83|4|sit|sat|sat|sentarse|seure|",
+        "84|4|sleep|slept|slept|dormir|dormir|",
+        "85|5|smell|smelt/smelled|smelt/smelled|oler|olorar / fer olor|",
+        "86|5|speak|spoke|spoken|hablar|parlar|",
+        "87|5|spell|spelt/spelled|spelt/spelled|deletrear|lletrejar|",
+        "88|5|spend|spent|spent|gastar / pasar tiempo|gastar / passar temps|",
+        "89|5|stand|stood|stood|estar de pie|estar dret|",
+        "90|5|steal|stole|stolen|robar|robar|",
+        "91|5|stick|stuck|stuck|pegar / clavar|apegar / clavar|",
+        "92|5|sting|stung|stung|picar (un insecto)|picar (un insecte)|",
+        "93|5|sweep|swept|swept|barrer|agranar|",
+        "94|5|swim|swam|swum|nadar|nadar|",
+        "95|5|take|took|taken|coger / tomar|agafar/ prendre|",
+        "96|5|teach|taught|taught|enseñar|ensenyar|",
+        "97|5|tear|tore|torn|rasgar|esgarrar|",
+        "98|5|tell|told|told|contar / decir|contar / dir|",
+        "99|5|think|thought|thought|pensar|pensar|",
+        "100|5|throw|threw|thrown|lanzar|llançar|",
+        "101|5|understand|understood|understood|entender|entendre|",
+        "102|5|wake up|woke up|woken up|despertarse|despertar-se|",
+        "103|5|wear|wore|worn|llevar puesto (ropa)|portar (roba)|",
+        "104|5|win|won|won|ganar|guanyar|",
+        "105|5|write|wrote|written|escribir|escriure|"
+      ];
+
+      const seenUids = new Set();
+      const seenPresents = new Map();
+      const blockCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+      dataset.forEach((item, index) => {
+        const expectedId = index + 1;
+        const expectedBlock = Math.floor(index / 21) + 1;
+
+        // 2. Numeración consecutiva 1..105
+        if (item.id !== expectedId) {
+          errors.push(`Numeración rota en índice ${index}: id=${item.id}, esperado=${expectedId}.`);
+        }
+
+        // 3. Bloque correcto (1..5 de 21 entradas cada uno)
+        if (item.block !== expectedBlock) {
+          errors.push(`Bloque incorrecto en verbo #${item.id}: block=${item.block}, esperado=${expectedBlock}.`);
+        }
+        if (blockCounts[item.block] !== undefined) {
+          blockCounts[item.block]++;
+        }
+
+        // 4. Ningún campo académico obligatorio vacío
+        const requiredFields = ["uid", "present", "past", "participle", "es", "va"];
+        requiredFields.forEach(field => {
+          if (typeof item[field] !== "string" || item[field].trim().length === 0) {
+            errors.push(`Campo vacío '${field}' en la entrada #${item.id}.`);
+          }
+        });
+
+        // 5. Identificadores únicos y estables (UID)
+        if (seenUids.has(item.uid)) {
+          errors.push(`UID duplicado detectado: '${item.uid}' en #${item.id}.`);
+        }
+        seenUids.add(item.uid);
+
+        // 6. Control de infinitivos repetidos (únicamente 'lie' está autorizado en #55 y #56)
+        if (seenPresents.has(item.present)) {
+          if (item.present !== "lie") {
+            errors.push(`Infinitivo duplicado no autorizado: '${item.present}' en #${item.id}.`);
+          }
+        }
+        seenPresents.set(item.present, (seenPresents.get(item.present) || 0) + 1);
+
+        // 7. Correspondencia exacta de todas las filas y columnas con el PDF oficial
+        const actualSignature = `${item.id}|${item.block}|${item.present}|${item.past}|${item.participle}|${item.es}|${item.va}|${item.note || ""}`;
+        if (actualSignature !== CANONICAL_SIGNATURES[index]) {
+          errors.push(`Fallo de correspondencia con el PDF en la fila #${expectedId}: '${actualSignature}' !== '${CANONICAL_SIGNATURES[index]}'.`);
+        }
+      });
+
+      // Comprobar que cada uno de los 5 bloques tiene exactamente 21 entradas
+      [1, 2, 3, 4, 5].forEach(b => {
+        if (blockCounts[b] !== 21) {
+          errors.push(`El Bloque ${b} contiene ${blockCounts[b]} entradas en lugar de 21.`);
+        }
+      });
+
+      // Comprobación específica de las dos entradas 'lie' (#55 y #56) y de 'lay' (#49)
+      const v49 = dataset[48];
+      const v55 = dataset[54];
+      const v56 = dataset[55];
+      if (!v49 || v49.uid !== "lay__laid__laid") {
+        errors.push("La entrada #49 (lay - laid - laid) no está correctamente registrada.");
+      }
+      if (!v55 || v55.present !== "lie" || v55.past !== "lay" || v55.participle !== "lain") {
+        errors.push("La entrada #55 (lie - lay - lain) no está correctamente diferenciada.");
+      }
+      if (!v56 || v56.present !== "lie" || v56.past !== "lied" || v56.participle !== "lied" || v56.note !== "verbo regular") {
+        errors.push("La entrada #56 (lie - lied - lied, verbo regular) no está correctamente diferenciada.");
+      }
+
+      return {
+        valid: errors.length === 0,
+        total: dataset.length,
+        errors
+      };
+    };
+
+    const VALIDATION_REPORT = runAcademicIntegrityCheck(VERBS_DATA);
+
+    /**
+     * ============================================================================
+     * 4. UTILIDADES DE BÚSQUEDA Y SÍNTESIS DE VOZ (AUDIO EN-GB)
+     * ============================================================================
+     */
+    // Normaliza texto para que el buscador funcione con o sin tildes/diacríticos
+    const normalizeSearchText = (str) => {
+      if (!str) return "";
+      return str
+        .toString()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    };
+
+    // Prepara una forma verbal inglesa para que el sintetizador no lea "/" como "slash"
+    // y aplique la aproximación fonética "red" al pasado/participio de "read" sin depender de su número de orden.
+    const formatSpokenEnglishForm = (verb, formType) => {
+      const rawValue = verb[formType] || "";
+
+      // Caso especial: verbo READ (identificado por su forma verbal/UID, independientemente de su número 66)
+      // Present -> "read" (/riːd/), Past Simple y Past Participle -> "red" (/red/)
+      if (verb.present === "read" && (formType === "past" || formType === "participle")) {
+        return "red";
+      }
+
+      // Sustituir barras "/" por una coma y espacio para que pronuncie ambas variantes con pausa natural
+      return rawValue.replace(/\s*\/\s*/g, ", ");
+    };
+
+    /**
+     * ============================================================================
+     * 5. COMPONENTES DE ICONOGRAFÍA Y LOGOTIPO CORPORATIVO
+     * ============================================================================
+     */
+    const BrandLogo = ({ size = "md" }) => {
+      const [imgFailed, setImgFailed] = useState(false);
+      const heightClass = size === "lg" ? "h-12 sm:h-14" : "h-9 sm:h-11";
+
+      return (
+        <div
+          className="inline-flex items-center select-none rounded-2xl transition-colors dark:bg-white/95 dark:px-3 dark:py-1.5 dark:shadow-sm dark:ring-1 dark:ring-white/20"
+          title="Aula Next ESO"
+        >
+          {!imgFailed ? (
+            <img
+              src={BRAND_CONFIG.logoSrc}
+              alt="Aula Next ESO"
+              className={`${heightClass} w-auto object-contain`}
+              onError={() => setImgFailed(true)}
+            />
+          ) : (
+            /* Respaldo fiel en caso de que el archivo HTML se abra sin la imagen adjunta en la misma carpeta */
+            <div className="flex flex-col items-end leading-none">
+              <div className="flex items-center tracking-tight font-black text-2xl sm:text-3xl">
+                <span className="text-[#0F2547]">Aula</span>
+                <span className="text-[#0055A5] ml-1.5">Nex</span>
+                <span className="text-[#28A86B]">t</span>
+              </div>
+              <span className="bg-[#F08519] text-white text-[10px] sm:text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-widest mt-0.5">
+                ESO
+              </span>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const SunIcon = ({ className = "w-5 h-5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.93 4.93 1.41 1.41" />
+        <path d="m17.66 17.66 1.41 1.41" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="m6.34 17.66-1.41 1.41" />
+        <path d="m19.07 4.93-1.41 1.41" />
+      </svg>
+    );
+
+    const MoonIcon = ({ className = "w-5 h-5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+      </svg>
+    );
+
+    const SpeakerIcon = ({ className = "w-5 h-5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+      </svg>
+    );
+
+    const StarIcon = ({ className = "w-5 h-5", filled = false }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+    );
+
+    const GridIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <rect width="7" height="7" x="3" y="3" rx="1.5" />
+        <rect width="7" height="7" x="14" y="3" rx="1.5" />
+        <rect width="7" height="7" x="14" y="14" rx="1.5" />
+        <rect width="7" height="7" x="3" y="14" rx="1.5" />
+      </svg>
+    );
+
+    const FocusIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+        <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+        <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+        <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+      </svg>
+    );
+
+    const ShuffleIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M16 3h5v5" />
+        <path d="M4 20 21 3" />
+        <path d="M21 16v5h-5" />
+        <path d="M15 15l6 6" />
+        <path d="M4 4l5 5" />
+      </svg>
+    );
+
+    const OrderResetIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+      </svg>
+    );
+
+    const SearchIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+    );
+
+    const FlipIndicatorIcon = ({ className = "w-3.5 h-3.5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M17 2.1l4 4-4 4" />
+        <path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4" />
+        <path d="M21 11.8v2a4 4 0 0 1-4 4H4.2" />
+      </svg>
+    );
+
+    const ChevronLeftIcon = ({ className = "w-5 h-5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    );
+
+    const ChevronRightIcon = ({ className = "w-5 h-5" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    );
+
+    const LockIcon = ({ className = "w-6 h-6" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+    );
+
+    const LogoutIcon = ({ className = "w-4 h-4" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" x2="9" y1="12" y2="12" />
+      </svg>
+    );
+
+    /**
+     * ============================================================================
+     * 6. PANTALLA DE ACCESO CORPORATIVA (AULA NEXT ESO)
+     * No renderiza ninguna tarjeta ni dato de verbos antes de validar el acceso.
+     * ============================================================================
+     */
+    const LockScreen = ({ onUnlock, isDark, onToggleTheme }) => {
+      const [passwordInput, setPasswordInput] = useState("");
+      const [showPassword, setShowPassword] = useState(false);
+      const [errorMsg, setErrorMsg] = useState("");
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (passwordInput === ACCESS_KEY_REQUIRED) {
+          try {
+            localStorage.setItem(STORAGE_KEYS.UNLOCKED, "1");
+          } catch (err) {
+            // Continuar en memoria si el navegador bloquea localStorage
+          }
+          onUnlock();
+        } else {
+          setErrorMsg("Contraseña incorrecta. Verifica las mayúsculas, minúsculas y símbolos.");
+        }
+      };
+
+      return (
+        <div className="min-h-screen w-full flex flex-col justify-between bg-gradient-to-b from-[#EAF2FB] via-[#F5F9FD] to-white dark:from-[#071124] dark:via-[#09152B] dark:to-[#0C1B36] p-4 sm:p-6 transition-colors duration-200">
+          {/* Barra superior con conmutador de tema */}
+          <div className="w-full max-w-md mx-auto flex justify-end pt-1">
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo nocturno"}
+              title={isDark ? "Modo claro" : "Modo nocturno"}
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-extrabold border bg-white/90 hover:bg-white text-[#0F2547] border-slate-200/90 dark:bg-[#13284C] dark:hover:bg-[#19335E] dark:text-slate-100 dark:border-slate-700/80 shadow-sm transition active:scale-95"
+            >
+              {isDark ? (
+                <>
+                  <SunIcon className="w-4 h-4 text-[#F08519]" />
+                  <span>Modo Claro</span>
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="w-4 h-4 text-[#0055A5]" />
+                  <span>Modo Nocturno</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          <div className="w-full max-w-md mx-auto my-auto py-4">
+            <div className="bg-white dark:bg-[#112445] rounded-3xl border border-slate-200/80 dark:border-slate-700/80 an-card-shadow-focus overflow-hidden transition-colors duration-200">
+              {/* Banda superior corporativa */}
+              <div className="h-2 w-full bg-gradient-to-r from-[#0F2547] via-[#0055A5] to-[#28A86B]"></div>
+
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-col items-center text-center mb-6">
+                  <BrandLogo size="lg" />
+                  <span className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#0055A5]/10 text-[#0055A5] dark:bg-[#0055A5]/30 dark:text-sky-200 border border-[#0055A5]/20 dark:border-sky-400/30">
+                    Inglés · 1.º ESO
+                  </span>
+                  <h1 className="mt-3 text-xl sm:text-2xl font-extrabold text-[#0F2547] dark:text-white tracking-tight">
+                    105 VERBOS · LISTA OFICIAL DE INGLÉS
+                  </h1>
+                  <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 font-medium">
+                    Aplicación interactiva de estudio y memorización
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="aulanext-pass"
+                      className="block text-xs font-bold uppercase tracking-wider text-[#0F2547] dark:text-slate-200 mb-2"
+                    >
+                      Contraseña de acceso para alumnado
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="aulanext-pass"
+                        type={showPassword ? "text" : "password"}
+                        value={passwordInput}
+                        onChange={(e) => {
+                          setPasswordInput(e.target.value);
+                          if (errorMsg) setErrorMsg("");
+                        }}
+                        placeholder="Introduce la contraseña..."
+                        autoComplete="off"
+                        className="w-full pl-4 pr-20 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-600 bg-slate-50/90 dark:bg-[#0B1830] text-[#0F2547] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 font-semibold focus:bg-white dark:focus:bg-[#0E1E3B] focus:outline-none focus:ring-2 focus:ring-[#0055A5] focus:border-[#0055A5] transition"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#0055A5] dark:text-sky-300 hover:text-[#0F2547] dark:hover:text-white px-2 py-1 rounded-lg transition"
+                      >
+                        {showPassword ? "Ocultar" : "Mostrar"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {errorMsg && (
+                    <div
+                      role="alert"
+                      className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800/80 text-xs font-bold text-red-700 dark:text-red-200 flex items-center gap-2"
+                    >
+                      <span>⚠️</span>
+                      <span>{errorMsg}</span>
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 px-6 rounded-2xl font-extrabold text-white bg-[#0055A5] hover:bg-[#0F2547] dark:hover:bg-[#1967B8] active:scale-[0.99] transition shadow-md shadow-[#0055A5]/25 flex items-center justify-center gap-2"
+                  >
+                    <LockIcon className="w-4 h-4" />
+                    <span>Acceder al estudio</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <footer className="text-center text-xs text-slate-500 dark:text-slate-400 font-medium py-3">
+            <span>{BRAND_CONFIG.name}</span>
+            <span className="mx-2">·</span>
+            <a href={BRAND_CONFIG.phoneHref} className="hover:text-[#0055A5] dark:hover:text-sky-300 transition">{BRAND_CONFIG.phone}</a>
+            <span className="mx-2">·</span>
+            <a href={BRAND_CONFIG.emailHref} className="hover:text-[#0055A5] dark:hover:text-sky-300 transition">{BRAND_CONFIG.email}</a>
+          </footer>
+        </div>
+      );
+    };
+
+    /**
+     * ============================================================================
+     * 7. COMPONENTE FLASHCARD INTERACTIVA (ANVERSO Y REVERSO)
+     * Altura dinámica sin recortes, audio general e individual, marcado de difícil.
+     * ============================================================================
+     */
+    const VerbFlashcard = ({
+      verb,
+      isDifficult,
+      onToggleDifficult,
+      onSpeakAll,
+      onSpeakSingle,
+      isFocusMode = false,
+      externalFlipTrigger = 0
+    }) => {
+      const [flipped, setFlipped] = useState(false);
+
+      // Al cambiar de verbo, volver siempre al anverso
+      useEffect(() => {
+        setFlipped(false);
+      }, [verb.uid]);
+
+      // Permitir giro por teclado desde el Modo Focus
+      useEffect(() => {
+        if (externalFlipTrigger > 0) {
+          setFlipped(prev => !prev);
+        }
+      }, [externalFlipTrigger]);
+
+      const handleCardClick = () => {
+        setFlipped(prev => !prev);
+      };
+
+      const handleAudioAllClick = (e) => {
+        e.stopPropagation();
+        onSpeakAll(verb);
+      };
+
+      const handleAudioSingleClick = (e, formKey) => {
+        e.stopPropagation();
+        onSpeakSingle(verb, formKey);
+      };
+
+      const handleDifficultClick = (e) => {
+        e.stopPropagation();
+        onToggleDifficult(verb.uid);
+      };
+
+      return (
+        <div
+          onClick={handleCardClick}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (!isFocusMode && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              setFlipped(prev => !prev);
+            }
+          }}
+          aria-label={`Verbo ${verb.id}: ${verb.present}. Toca para girar.`}
+          className={`w-full flip-perspective cursor-pointer select-none group ${
+            isFocusMode ? "max-w-lg mx-auto" : ""
+          }`}
+        >
+          <div className={`flip-inner w-full ${flipped ? "is-flipped" : ""}`}>
+            
+            {/* ============================================================
+                ANVERSO DE LA TARJETA (PRESENT) - Diseño Corporativo Mejorado
+               ============================================================ */}
+            <div
+              className={`flip-face flip-front w-full rounded-2xl an-front-surface border overflow-hidden relative ${
+                isDifficult
+                  ? "border-[#F08519] ring-2 ring-[#F08519]/25"
+                  : "border-[#0055A5]/20 dark:border-sky-400/20 hover:border-[#0055A5]/50 dark:hover:border-sky-400/45"
+              } ${
+                isFocusMode ? "an-card-shadow-focus p-6 sm:p-8 min-h-[340px]" : "an-card-shadow p-5 min-h-[290px]"
+              } flex flex-col justify-between transition-all`}
+            >
+              {/* Acento superior corporativo sutil */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0F2547] via-[#0055A5] to-[#F08519]"></div>
+
+              {/* Cabecera del Anverso: Número + Bloque + Acciones */}
+              <div className="flex items-center justify-between gap-2 pt-1">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs sm:text-sm font-black bg-[#F08519] text-white shadow-sm">
+                    #{verb.id}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-white/80 dark:bg-[#0B1830]/80 text-[#0F2547]/80 dark:text-slate-200 border border-[#0055A5]/15 dark:border-slate-600/70">
+                    Bloque {verb.block}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleDifficultClick}
+                    title={isDifficult ? "Quitar de verbos difíciles" : "Marcar como verbo difícil"}
+                    aria-label={isDifficult ? "Quitar de verbos difíciles" : "Marcar como verbo difícil"}
+                    className={`p-2.5 rounded-xl border transition active:scale-95 ${
+                      isDifficult
+                        ? "bg-amber-50 dark:bg-[#F08519]/20 border-[#F08519] text-[#F08519]"
+                        : "bg-white/85 dark:bg-[#0B1830]/80 border-slate-200/90 dark:border-slate-600/80 text-slate-400 dark:text-slate-300 hover:text-[#F08519] hover:border-[#F08519]/50"
+                    }`}
+                  >
+                    <StarIcon className="w-5 h-5" filled={isDifficult} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleAudioAllClick}
+                    title="Escuchar las tres formas en inglés"
+                    aria-label={`Escuchar pronunciación de ${verb.present}`}
+                    className="p-2.5 rounded-xl bg-[#0055A5] hover:bg-[#0F2547] dark:bg-[#0055A5] dark:hover:bg-sky-500 text-white border border-[#0055A5] transition active:scale-95 shadow-sm"
+                  >
+                    <SpeakerIcon className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Cuerpo Central del Anverso: PRESENT destacado */}
+              <div className="my-auto py-6 text-center">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0055A5]/10 dark:bg-sky-400/15 border border-[#0055A5]/20 dark:border-sky-400/25 mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#0055A5] dark:bg-sky-300"></span>
+                  <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.18em] text-[#0055A5] dark:text-sky-200">
+                    Present
+                  </span>
+                </div>
+                <div
+                  className={`font-black text-[#0F2547] dark:text-white tracking-tight break-words leading-tight ${
+                    isFocusMode ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"
+                  }`}
+                >
+                  {verb.present}
+                </div>
+                {verb.note && (
+                  <div className="mt-2.5">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-extrabold uppercase tracking-wider bg-[#F08519]/15 dark:bg-[#F08519]/25 text-[#C86400] dark:text-amber-300 border border-[#F08519]/30">
+                      {verb.note}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Pie del Anverso: Indicación de giro */}
+              <div className="pt-3 border-t border-[#0055A5]/15 dark:border-slate-700/70 flex items-center justify-center">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/75 dark:bg-[#0B1830]/75 border border-[#0055A5]/15 dark:border-slate-600/60 text-xs font-bold text-[#0F2547]/80 dark:text-slate-200 group-hover:border-[#0055A5]/40 dark:group-hover:border-sky-400/50 transition">
+                  <FlipIndicatorIcon className="w-3.5 h-3.5 text-[#F08519]" />
+                  <span>Toca para girar</span>
+                </span>
+              </div>
+            </div>
+
+            {/* ============================================================
+                REVERSO DE LA TARJETA (3 FORMAS + CASTELLANO + VALENCIÀ)
+                Jerarquía cromática: Present (Azul marino), Past Simple (Azul corporativo),
+                Past Participle (Naranja), Meanings (Verde corporativo suave)
+               ============================================================ */}
+            <div
+              className={`flip-face flip-back w-full rounded-2xl an-back-surface border-2 ${
+                isDifficult ? "border-[#F08519]" : "border-[#0055A5] dark:border-sky-500/80"
+              } ${
+                isFocusMode ? "an-card-shadow-focus p-5 sm:p-7" : "an-card-shadow p-4 sm:p-5"
+              } flex flex-col justify-between gap-3.5 transition-colors`}
+            >
+              {/* Cabecera del Reverso */}
+              <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200/80 dark:border-slate-700/80">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-black bg-[#F08519] text-white">
+                    #{verb.id}
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-300">
+                    Bloque {verb.block}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleDifficultClick}
+                    title={isDifficult ? "Quitar de difíciles" : "Marcar como difícil"}
+                    aria-label={isDifficult ? "Quitar de difíciles" : "Marcar como difícil"}
+                    className={`p-2 rounded-xl border transition active:scale-95 ${
+                      isDifficult
+                        ? "bg-amber-50 dark:bg-[#F08519]/20 border-[#F08519] text-[#F08519]"
+                        : "bg-slate-50 dark:bg-[#0B1830] border-slate-200 dark:border-slate-600 text-slate-400 dark:text-slate-300 hover:text-[#F08519]"
+                    }`}
+                  >
+                    <StarIcon className="w-4 h-4" filled={isDifficult} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleAudioAllClick}
+                    title="Escuchar las 3 formas seguidas"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0055A5] hover:bg-[#0F2547] dark:hover:bg-sky-500 text-white text-xs font-bold transition active:scale-95 shadow-sm"
+                  >
+                    <SpeakerIcon className="w-4 h-4" />
+                    <span>3 Formas</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Las 3 formas inglesas con su jerarquía cromática corporativa */}
+              <div className="grid grid-cols-1 gap-2">
+                {/* 1. PRESENT -> Azul Marino (#0F2547) */}
+                <div className="flex items-center justify-between gap-2 bg-[#0F2547]/[0.05] dark:bg-[#162E57]/90 rounded-xl px-3.5 py-2 border border-[#0F2547]/15 dark:border-slate-600/80 border-l-4 border-l-[#0F2547] dark:border-l-slate-200 transition">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#0F2547]/75 dark:text-slate-300">
+                        Present
+                      </span>
+                      {verb.note && (
+                        <span className="px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase tracking-wider bg-[#F08519]/15 dark:bg-[#F08519]/25 text-[#C86400] dark:text-amber-300">
+                          {verb.note}
+                        </span>
+                      )}
+                    </div>
+                    <span className={`block font-black text-[#0F2547] dark:text-white break-words leading-snug ${isFocusMode ? "text-lg sm:text-xl" : "text-base"}`}>
+                      {verb.present}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => handleAudioSingleClick(e, "present")}
+                    title={`Escuchar Present: ${verb.present}`}
+                    aria-label={`Escuchar Present: ${verb.present}`}
+                    className="p-2 rounded-lg text-[#0F2547] dark:text-slate-100 hover:bg-[#0F2547]/10 dark:hover:bg-white/10 active:scale-95 transition shrink-0"
+                  >
+                    <SpeakerIcon className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* 2. PAST SIMPLE -> Azul Corporativo (#0055A5) */}
+                <div className="flex items-center justify-between gap-2 bg-[#0055A5]/[0.07] dark:bg-[#0055A5]/25 rounded-xl px-3.5 py-2 border border-[#0055A5]/20 dark:border-sky-400/30 border-l-4 border-l-[#0055A5] dark:border-l-sky-400 transition">
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-[10px] font-extrabold uppercase tracking-wider text-[#0055A5] dark:text-sky-300">
+                      Past Simple
+                    </span>
+                    <span className={`block font-black text-[#0055A5] dark:text-sky-100 break-words leading-snug ${isFocusMode ? "text-lg sm:text-xl" : "text-base"}`}>
+                      {verb.past}
+                      {verb.present === "read" && (
+                        <span className="ml-1.5 text-[11px] font-semibold text-[#0F2547]/70 dark:text-sky-200/80">/red/</span>
+                      )}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => handleAudioSingleClick(e, "past")}
+                    title={`Escuchar Past Simple: ${verb.past}`}
+                    aria-label={`Escuchar Past Simple: ${verb.past}`}
+                    className="p-2 rounded-lg text-[#0055A5] dark:text-sky-200 hover:bg-[#0055A5]/15 dark:hover:bg-sky-400/20 active:scale-95 transition shrink-0"
+                  >
+                    <SpeakerIcon className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* 3. PAST PARTICIPLE -> Naranja Corporativo (#F08519) */}
+                <div className="flex items-center justify-between gap-2 bg-[#F08519]/[0.09] dark:bg-[#F08519]/20 rounded-xl px-3.5 py-2 border border-[#F08519]/30 dark:border-[#F08519]/40 border-l-4 border-l-[#F08519] transition">
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-[10px] font-extrabold uppercase tracking-wider text-[#C86400] dark:text-amber-300">
+                      Past Participle
+                    </span>
+                    <span className={`block font-black text-[#B85900] dark:text-amber-100 break-words leading-snug ${isFocusMode ? "text-lg sm:text-xl" : "text-base"}`}>
+                      {verb.participle}
+                      {verb.present === "read" && (
+                        <span className="ml-1.5 text-[11px] font-semibold text-[#9A4B00] dark:text-amber-200/80">/red/</span>
+                      )}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => handleAudioSingleClick(e, "participle")}
+                    title={`Escuchar Past Participle: ${verb.participle}`}
+                    aria-label={`Escuchar Past Participle: ${verb.participle}`}
+                    className="p-2 rounded-lg text-[#C86400] dark:text-amber-200 hover:bg-[#F08519]/15 dark:hover:bg-[#F08519]/25 active:scale-95 transition shrink-0"
+                  >
+                    <SpeakerIcon className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Bloque de Significados (Castellano y Valencià) con color Verde Corporativo suave (#28A86B) */}
+              <div className="rounded-xl bg-[#28A86B]/[0.11] dark:bg-[#28A86B]/20 border border-[#28A86B]/30 dark:border-[#28A86B]/45 border-l-4 border-l-[#28A86B] p-3 space-y-2">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#1B7A4E] dark:text-emerald-300">
+                    Meaning · Castellano
+                  </span>
+                  <span className={`font-extrabold text-[#0F2547] dark:text-emerald-50 break-words leading-snug ${isFocusMode ? "text-base" : "text-sm"}`}>
+                    {verb.es}
+                  </span>
+                </div>
+
+                <div className="h-px bg-[#28A86B]/25 dark:bg-emerald-400/25 w-full"></div>
+
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#1B7A4E] dark:text-emerald-300">
+                    Meaning · Valencià
+                  </span>
+                  <span className={`font-extrabold text-[#0F2547] dark:text-emerald-50 break-words leading-snug ${isFocusMode ? "text-base" : "text-sm"}`}>
+                    {verb.va}
+                  </span>
+                </div>
+              </div>
+
+              {/* Pie del Reverso */}
+              <div className="pt-1 flex items-center justify-center">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-500 dark:text-slate-300">
+                  <FlipIndicatorIcon className="w-3 h-3 text-[#F08519]" />
+                  <span>Toca para volver al anverso</span>
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    };
+
+    /**
+     * ============================================================================
+     * 8. APLICACIÓN PRINCIPAL (AULA NEXT ESO)
+     * ============================================================================
+     */
+    const App = () => {
+      // Estado de Modo Nocturno / Claro (respeta localStorage o preferencia del sistema en 1ª visita)
+      const [isDark, setIsDark] = useState(() => {
+        try {
+          const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+          if (savedTheme === "dark") return true;
+          if (savedTheme === "light") return false;
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return true;
+          }
+        } catch {
+          // Ignorar si localStorage está restringido
+        }
+        return false;
+      });
+
+      // Aplicar clase 'dark' al elemento raíz <html> de forma inmediata
+      useEffect(() => {
+        const rootHtml = document.documentElement;
+        if (isDark) {
+          rootHtml.classList.add("dark");
+        } else {
+          rootHtml.classList.remove("dark");
+        }
+        try {
+          localStorage.setItem(STORAGE_KEYS.THEME, isDark ? "dark" : "light");
+        } catch {
+          // Ignorar errores de almacenamiento
+        }
+      }, [isDark]);
+
+      const handleToggleTheme = useCallback(() => {
+        setIsDark(prev => !prev);
+      }, []);
+
+      // Estado de sesión
+      const [isUnlocked, setIsUnlocked] = useState(() => {
+        try {
+          return localStorage.getItem(STORAGE_KEYS.UNLOCKED) === "1";
+        } catch {
+          return false;
+        }
+      });
+
+      // Modos de estudio: 'grid' | 'focus'
+      const [studyMode, setStudyMode] = useState("grid");
+
+      // Filtro por bloque: 'all' | 1 | 2 | 3 | 4 | 5
+      const [selectedBlock, setSelectedBlock] = useState("all");
+
+      // Buscador
+      const [searchQuery, setSearchQuery] = useState("");
+
+      // Orden de los UIDs (permite barajar y restaurar el orden 1-105 manteniendo la identidad de cada entrada)
+      const [verbOrderUids, setVerbOrderUids] = useState(() => VERBS_DATA.map(v => v.uid));
+      const [isShuffled, setIsShuffled] = useState(false);
+
+      // Verbos marcados como difíciles (guardados por UID estable en localStorage, con migración segura desde la versión de 95 verbos)
+      const [difficultUids, setDifficultUids] = useState(() => {
+        const validUids = new Set(VERBS_DATA.map(v => v.uid));
+        try {
+          // 1. Intentar leer la clave nueva de 105 verbos (basada en UID estable)
+          const savedV2 = localStorage.getItem(STORAGE_KEYS.DIFFICULT_V2);
+          if (savedV2) {
+            const parsedV2 = JSON.parse(savedV2);
+            if (Array.isArray(parsedV2)) {
+              return new Set(parsedV2.filter(uid => typeof uid === "string" && validUids.has(uid)));
+            }
+          }
+
+          // 2. Migración automática y segura desde la versión anterior (95 verbos por ID numérico)
+          const legacyRaw = localStorage.getItem(STORAGE_KEYS.LEGACY_DIFFICULT_V1);
+          if (legacyRaw) {
+            const parsedLegacy = JSON.parse(legacyRaw);
+            if (Array.isArray(parsedLegacy)) {
+              const migrated = new Set();
+              parsedLegacy.forEach(oldItem => {
+                if (typeof oldItem === "number" && LEGACY_95_ID_TO_UID[oldItem]) {
+                  const mappedUid = LEGACY_95_ID_TO_UID[oldItem];
+                  if (validUids.has(mappedUid)) migrated.add(mappedUid);
+                } else if (typeof oldItem === "string" && validUids.has(oldItem)) {
+                  migrated.add(oldItem);
+                }
+              });
+              localStorage.setItem(STORAGE_KEYS.DIFFICULT_V2, JSON.stringify([...migrated]));
+              return migrated;
+            }
+          }
+        } catch {
+          return new Set();
+        }
+        return new Set();
+      });
+      const [onlyDifficult, setOnlyDifficult] = useState(false);
+
+      // Índice actual en Modo Focus y disparador de giro por teclado
+      const [focusIndex, setFocusIndex] = useState(0);
+      const [keyboardFlipCount, setKeyboardFlipCount] = useState(0);
+
+      // Estado del motor de voz (Web Speech API)
+      const [voices, setVoices] = useState([]);
+      const [audioNotice, setAudioNotice] = useState(null);
+
+      // Cargar voces disponibles en el navegador
+      useEffect(() => {
+        if (!("speechSynthesis" in window)) {
+          setAudioNotice("Tu navegador no soporta síntesis de voz integrada.");
+          return;
+        }
+
+        const updateVoices = () => {
+          const available = window.speechSynthesis.getVoices() || [];
+          setVoices(available);
+        };
+
+        updateVoices();
+        window.speechSynthesis.onvoiceschanged = updateVoices;
+
+        return () => {
+          if ("speechSynthesis" in window) {
+            window.speechSynthesis.onvoiceschanged = null;
+          }
+        };
+      }, []);
+
+      // Sincronizar verbos difíciles por UID estable en localStorage
+      useEffect(() => {
+        try {
+          localStorage.setItem(STORAGE_KEYS.DIFFICULT_V2, JSON.stringify([...difficultUids]));
+        } catch {
+          // Ignorar errores de cuota o navegación privada
+        }
+      }, [difficultUids]);
+
+      // Selección preferente de voz británica (en-GB) o respaldo en inglés (en-*)
+      const preferredEnglishVoice = useMemo(() => {
+        if (!voices || voices.length === 0) return null;
+        const gbVoices = voices.filter(v => v.lang && v.lang.toLowerCase().replace("_", "-").startsWith("en-gb"));
+        if (gbVoices.length > 0) {
+          const premiumGb = gbVoices.find(v => /google|daniel|libby|hazel|kate|serena|natural/i.test(v.name));
+          return premiumGb || gbVoices[0];
+        }
+        const anyEnglish = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("en"));
+        return anyEnglish || null;
+      }, [voices]);
+
+      // Función para pronunciar texto en inglés
+      const speakEnglishText = useCallback((textToSpeak) => {
+        if (!("speechSynthesis" in window)) {
+          setAudioNotice("Este navegador no permite reproducir audio por síntesis de voz.");
+          return;
+        }
+
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+          utterance.lang = "en-GB";
+          utterance.rate = 0.85; // Velocidad didáctica para 1.º ESO
+          utterance.pitch = 1.0;
+
+          if (preferredEnglishVoice) {
+            utterance.voice = preferredEnglishVoice;
+            utterance.lang = preferredEnglishVoice.lang;
+          } else if (voices.length > 0) {
+            // Si el dispositivo cargó voces pero ninguna es inglesa, avisar al usuario
+            const hasAnyEn = voices.some(v => v.lang && v.lang.toLowerCase().startsWith("en"));
+            if (!hasAnyEn) {
+              setAudioNotice("No se ha detectado una voz en inglés instalada en tu dispositivo. Es posible que la pronunciación no sea precisa.");
+            }
+          }
+
+          window.speechSynthesis.speak(utterance);
+        } catch (err) {
+          setAudioNotice("No se pudo iniciar la reproducción de voz en este navegador.");
+        }
+      }, [preferredEnglishVoice, voices]);
+
+      // Pronunciar las 3 formas de un verbo
+      const handleSpeakAllForms = useCallback((verb) => {
+        const p1 = formatSpokenEnglishForm(verb, "present");
+        const p2 = formatSpokenEnglishForm(verb, "past");
+        const p3 = formatSpokenEnglishForm(verb, "participle");
+        speakEnglishText(`${p1}. ${p2}. ${p3}.`);
+      }, [speakEnglishText]);
+
+      // Pronunciar 1 sola forma de un verbo
+      const handleSpeakSingleForm = useCallback((verb, formKey) => {
+        const spokenForm = formatSpokenEnglishForm(verb, formKey);
+        speakEnglishText(spokenForm);
+      }, [speakEnglishText]);
+
+      // Mapa rápido por UID estable
+      const verbsByUid = useMemo(() => {
+        const map = new Map();
+        VERBS_DATA.forEach(v => map.set(v.uid, v));
+        return map;
+      }, []);
+
+      // Lista filtrada y ordenada según Bloque, Búsqueda, Difíciles y Orden actual
+      const filteredVerbs = useMemo(() => {
+        const q = normalizeSearchText(searchQuery);
+        const orderedList = verbOrderUids.map(uid => verbsByUid.get(uid)).filter(Boolean);
+
+        return orderedList.filter(verb => {
+          // 1. Filtro por bloque (1..5 o 'all')
+          if (selectedBlock !== "all" && verb.block !== selectedBlock) {
+            return false;
+          }
+
+          // 2. Filtro de solo difíciles (identificado por UID estable)
+          if (onlyDifficult && !difficultUids.has(verb.uid)) {
+            return false;
+          }
+
+          // 3. Filtro por buscador (número, formas inglesas, castellano, valenciano o nota)
+          if (q.length > 0) {
+            const idMatch = verb.id.toString() === q || `#${verb.id}` === q;
+            const presentMatch = normalizeSearchText(verb.present).includes(q);
+            const pastMatch = normalizeSearchText(verb.past).includes(q);
+            const participleMatch = normalizeSearchText(verb.participle).includes(q);
+            const esMatch = normalizeSearchText(verb.es).includes(q);
+            const vaMatch = normalizeSearchText(verb.va).includes(q);
+            const noteMatch = verb.note ? normalizeSearchText(verb.note).includes(q) : false;
+
+            return idMatch || presentMatch || pastMatch || participleMatch || esMatch || vaMatch || noteMatch;
+          }
+
+          return true;
+        });
+      }, [verbOrderUids, verbsByUid, selectedBlock, onlyDifficult, difficultUids, searchQuery]);
+
+      // Ajustar el índice del Modo Focus cuando cambian los filtros
+      useEffect(() => {
+        setFocusIndex(0);
+      }, [selectedBlock, onlyDifficult, searchQuery]);
+
+      useEffect(() => {
+        if (focusIndex >= filteredVerbs.length && filteredVerbs.length > 0) {
+          setFocusIndex(filteredVerbs.length - 1);
+        }
+      }, [filteredVerbs.length, focusIndex]);
+
+      // Navegación Anterior / Siguiente en Modo Focus
+      const handlePrevFocus = useCallback(() => {
+        if (filteredVerbs.length === 0) return;
+        setFocusIndex(prev => (prev - 1 + filteredVerbs.length) % filteredVerbs.length);
+      }, [filteredVerbs.length]);
+
+      const handleNextFocus = useCallback(() => {
+        if (filteredVerbs.length === 0) return;
+        setFocusIndex(prev => (prev + 1) % filteredVerbs.length);
+      }, [filteredVerbs.length]);
+
+      // Soporte de teclado en Modo Focus (Flechas y Espacio)
+      useEffect(() => {
+        if (!isUnlocked || studyMode !== "focus") return;
+
+        const handleKeyDown = (e) => {
+          // No interceptar teclas si el alumno está escribiendo en el buscador
+          if (document.activeElement && document.activeElement.tagName === "INPUT") {
+            return;
+          }
+
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            handleNextFocus();
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            handlePrevFocus();
+          } else if (e.code === "Space") {
+            e.preventDefault();
+            setKeyboardFlipCount(c => c + 1);
+          }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+      }, [isUnlocked, studyMode, handleNextFocus, handlePrevFocus]);
+
+      // Barajar verbos (Fisher-Yates sobre UIDs)
+      const handleShuffle = () => {
+        const copy = [...verbOrderUids];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        setVerbOrderUids(copy);
+        setIsShuffled(true);
+        setFocusIndex(0);
+      };
+
+      // Restaurar orden original 1–105
+      const handleRestoreOrder = () => {
+        setVerbOrderUids(VERBS_DATA.map(v => v.uid));
+        setIsShuffled(false);
+        setFocusIndex(0);
+      };
+
+      // Marcar / desmarcar verbo difícil por UID estable
+      const handleToggleDifficult = useCallback((verbUid) => {
+        setDifficultUids(prev => {
+          const next = new Set(prev);
+          if (next.has(verbUid)) {
+            next.delete(verbUid);
+          } else {
+            next.add(verbUid);
+          }
+          return next;
+        });
+      }, []);
+
+      // Cerrar sesión
+      const handleLogout = () => {
+        try {
+          localStorage.removeItem(STORAGE_KEYS.UNLOCKED);
+        } catch {
+          // Ignorar error
+        }
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        setIsUnlocked(false);
+      };
+
+      // Si no está desbloqueado, renderizar exclusivamente la pantalla de acceso
+      if (!isUnlocked) {
+        return (
+          <LockScreen
+            onUnlock={() => setIsUnlocked(true)}
+            isDark={isDark}
+            onToggleTheme={handleToggleTheme}
+          />
+        );
+      }
+
+      const currentFocusVerb = filteredVerbs[focusIndex] || null;
+      const progressPercentage =
+        filteredVerbs.length > 0 ? Math.round(((focusIndex + 1) / filteredVerbs.length) * 100) : 0;
+
+      const BLOCKS_META = [
+        { id: "all", label: "Todos", range: "1–105" },
+        { id: 1,     label: "Bloque 1", range: "1–21" },
+        { id: 2,     label: "Bloque 2", range: "22–42" },
+        { id: 3,     label: "Bloque 3", range: "43–63" },
+        { id: 4,     label: "Bloque 4", range: "64–84" },
+        { id: 5,     label: "Bloque 5", range: "85–105" },
+      ];
+
+      return (
+        <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#09152B] text-[#0F2547] dark:text-slate-100 transition-colors duration-200">
+          {/* Banda superior corporativa */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-[#0F2547] via-[#0055A5] to-[#28A86B]"></div>
+
+          {/* ====================================================================
+              CABECERA CORPORATIVA AULA NEXT ESO
+             ==================================================================== */}
+          <header className="bg-white/95 dark:bg-[#0E1E3B]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 sticky top-0 z-30 shadow-sm transition-colors duration-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-5">
+                <BrandLogo size="md" />
+                <div className="hidden sm:block h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#F08519]/15 dark:bg-[#F08519]/25 text-[#D9720E] dark:text-amber-300">
+                      1.º ESO · Inglés
+                    </span>
+                    {VALIDATION_REPORT.valid ? (
+                      <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-bold text-[#1E8252] dark:text-emerald-300 bg-[#28A86B]/10 dark:bg-[#28A86B]/25 px-2.5 py-0.5 rounded-full">
+                        ✓ 105 verbos verificados
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-950/60 px-2.5 py-0.5 rounded-full">
+                        ⚠ Error de validación ({VALIDATION_REPORT.errors.length})
+                      </span>
+                    )}
+                  </div>
+                  <h1 className="text-sm sm:text-lg md:text-xl font-extrabold text-[#0F2547] dark:text-white tracking-tight mt-0.5">
+                    105 VERBOS · LISTA OFICIAL DE INGLÉS
+                  </h1>
+                </div>
+              </div>
+
+              {/* Controles de Cabecera: Lema + Botón Modo Nocturno (Sol/Luna) + Salir */}
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#13284C] px-3 py-1.5 rounded-xl border border-slate-200/70 dark:border-slate-700/80">
+                  <span className="w-2 h-2 rounded-full bg-[#28A86B]"></span>
+                  <span>Un bloque cada vez · Di en voz alta las 3 formas</span>
+                </div>
+
+                {/* Botón de Modo Claro / Modo Nocturno */}
+                <button
+                  type="button"
+                  onClick={handleToggleTheme}
+                  aria-label={isDark ? "Activar modo claro" : "Activar modo nocturno"}
+                  title={isDark ? "Cambiar a modo claro" : "Cambiar a modo nocturno"}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-extrabold border bg-slate-100 hover:bg-slate-200/80 text-[#0F2547] border-slate-200/90 dark:bg-[#152C52] dark:hover:bg-[#1C3866] dark:text-slate-100 dark:border-slate-700 transition active:scale-95"
+                >
+                  {isDark ? (
+                    <>
+                      <SunIcon className="w-4 h-4 text-[#F08519]" />
+                      <span className="hidden sm:inline">Claro</span>
+                    </>
+                  ) : (
+                    <>
+                      <MoonIcon className="w-4 h-4 text-[#0055A5]" />
+                      <span className="hidden sm:inline">Nocturno</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-300 bg-slate-100 dark:bg-[#152C52] hover:bg-red-50 dark:hover:bg-red-950/50 border border-slate-200/80 dark:border-slate-700 transition active:scale-95"
+                  title="Cerrar sesión"
+                >
+                  <LogoutIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Salir</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* ====================================================================
+              PANEL DE HERRAMIENTAS, BLOQUES Y CONTROLES DE ESTUDIO
+             ==================================================================== */}
+          <section className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-2 space-y-4">
+            
+            {/* Aviso en caso de limitación de voz del dispositivo */}
+            {audioNotice && (
+              <div className="bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-700/80 rounded-2xl p-3.5 flex items-center justify-between gap-3 text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-100">
+                <div className="flex items-center gap-2">
+                  <span>🔊</span>
+                  <span>{audioNotice}</span>
+                </div>
+                <button
+                  onClick={() => setAudioNotice(null)}
+                  className="px-2.5 py-1 rounded-lg bg-amber-200/60 dark:bg-amber-800/70 hover:bg-amber-200 dark:hover:bg-amber-700 font-bold text-xs shrink-0"
+                >
+                  Entendido
+                </button>
+              </div>
+            )}
+
+            {/* 1. Selector de los 5 Bloques del PDF */}
+            <div className="bg-white dark:bg-[#112445] rounded-2xl p-2 sm:p-2.5 border border-slate-200/90 dark:border-slate-700/80 an-card-shadow transition-colors duration-200">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                {BLOCKS_META.map(b => {
+                  const active = selectedBlock === b.id;
+                  return (
+                    <button
+                      key={b.id}
+                      type="button"
+                      onClick={() => setSelectedBlock(b.id)}
+                      className={`flex-1 min-w-[105px] sm:min-w-[120px] px-3 py-2 rounded-xl text-center transition select-none ${
+                        active
+                          ? "bg-[#0F2547] dark:bg-[#0055A5] text-white shadow-sm ring-1 ring-[#0055A5]/40"
+                          : "bg-slate-50/90 dark:bg-[#0B1830]/90 hover:bg-slate-100 dark:hover:bg-[#162E57] text-slate-600 dark:text-slate-300"
+                      }`}
+                    >
+                      <div className="text-xs sm:text-sm font-extrabold leading-tight">
+                        {b.label}
+                      </div>
+                      <div className={`text-[10px] font-bold mt-0.5 ${active ? "text-[#F08519] dark:text-amber-300" : "text-slate-400 dark:text-slate-400"}`}>
+                        Verbos {b.range}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 2. Barra de Modos (Grid / Focus), Buscador, Ordenación y Filtro de Difíciles */}
+            <div className="bg-white dark:bg-[#112445] rounded-2xl p-3.5 sm:p-4 border border-slate-200/90 dark:border-slate-700/80 an-card-shadow flex flex-col gap-3.5 transition-colors duration-200">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                
+                {/* Izquierda: Selector Modo Grid / Focus + Buscador */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 flex-1">
+                  {/* Conmutador Grid / Focus */}
+                  <div className="inline-flex bg-slate-100 dark:bg-[#0B1830] p-1 rounded-xl border border-slate-200/80 dark:border-slate-700/80 self-start sm:self-auto shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setStudyMode("grid")}
+                      className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition ${
+                        studyMode === "grid"
+                          ? "bg-[#0055A5] text-white shadow-sm"
+                          : "text-slate-600 dark:text-slate-300 hover:text-[#0F2547] dark:hover:text-white"
+                      }`}
+                    >
+                      <GridIcon className="w-4 h-4" />
+                      <span>Modo Grid</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setStudyMode("focus")}
+                      className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition ${
+                        studyMode === "focus"
+                          ? "bg-[#0055A5] text-white shadow-sm"
+                          : "text-slate-600 dark:text-slate-300 hover:text-[#0F2547] dark:hover:text-white"
+                      }`}
+                    >
+                      <FocusIcon className="w-4 h-4" />
+                      <span>Modo Focus</span>
+                    </button>
+                  </div>
+
+                  {/* Buscador multi-campo */}
+                  <div className="relative flex-1 max-w-md">
+                    <SearchIcon className="w-4 h-4 text-slate-400 dark:text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Buscar por n.º, inglés, castellano o valencià..."
+                      aria-label="Buscar verbos"
+                      className="w-full pl-9 pr-16 py-2 rounded-xl border border-slate-200 dark:border-slate-600/90 bg-slate-50/80 dark:bg-[#0B1830] focus:bg-white dark:focus:bg-[#0E1E3B] text-sm font-medium text-[#0F2547] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0055A5] focus:border-[#0055A5] transition"
+                    />
+                    {searchQuery ? (
+                      <button
+                        type="button"
+                        onClick={() => setSearchQuery("")}
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[11px] font-extrabold text-slate-500 dark:text-slate-200 hover:text-[#0F2547] dark:hover:text-white bg-slate-200/80 dark:bg-slate-700 px-2 py-0.5 rounded-md"
+                      >
+                        Limpiar
+                      </button>
+                    ) : (
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-extrabold text-slate-400 dark:text-slate-400 pointer-events-none">
+                        {filteredVerbs.length}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Derecha: Barajar, Restaurar 1-95 y Filtro de Difíciles */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleShuffle}
+                    className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-600/90 bg-white dark:bg-[#0B1830] hover:bg-slate-50 dark:hover:bg-[#162E57] text-[#0F2547] dark:text-slate-100 text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 transition active:scale-95"
+                    title="Barajar los verbos aleatoriamente"
+                  >
+                    <ShuffleIcon className="w-4 h-4 text-[#0055A5] dark:text-sky-400" />
+                    <span>Barajar</span>
+                  </button>
+
+                  {isShuffled && (
+                    <button
+                      type="button"
+                      onClick={handleRestoreOrder}
+                      className="px-3.5 py-2 rounded-xl border border-[#0055A5]/30 dark:border-sky-400/40 bg-[#0055A5]/5 dark:bg-[#0055A5]/25 hover:bg-[#0055A5]/10 dark:hover:bg-[#0055A5]/35 text-[#0055A5] dark:text-sky-200 text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 transition active:scale-95"
+                      title="Restaurar orden numérico del 1 al 105"
+                    >
+                      <OrderResetIcon className="w-4 h-4" />
+                      <span>Orden 1–105</span>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setOnlyDifficult(prev => !prev)}
+                    className={`px-3.5 py-2 rounded-xl border text-xs sm:text-sm font-extrabold inline-flex items-center gap-1.5 transition active:scale-95 ${
+                      onlyDifficult
+                        ? "bg-[#F08519] border-[#F08519] text-white shadow-sm"
+                        : "bg-white dark:bg-[#0B1830] border-slate-200 dark:border-slate-600/90 text-[#0F2547] dark:text-slate-100 hover:bg-amber-50/50 dark:hover:bg-[#162E57]"
+                    }`}
+                  >
+                    <StarIcon className="w-4 h-4" filled={onlyDifficult || difficultUids.size > 0} />
+                    <span>Difíciles</span>
+                    <span
+                      className={`ml-0.5 px-1.5 py-0.2 rounded-full text-[11px] ${
+                        onlyDifficult
+                          ? "bg-white/25 text-white"
+                          : "bg-amber-100 dark:bg-[#F08519]/25 text-[#D9720E] dark:text-amber-300"
+                      }`}
+                    >
+                      {difficultUids.size}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Barra inferior de estado y progreso (siempre visible y sincronizada con los filtros) */}
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-semibold text-slate-500 dark:text-slate-300">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span>
+                    Mostrando <strong className="text-[#0F2547] dark:text-white">{filteredVerbs.length}</strong> de 105 verbos
+                  </span>
+                  {selectedBlock !== "all" && (
+                    <span className="px-2 py-0.5 rounded-md bg-[#0F2547]/5 dark:bg-sky-400/15 text-[#0F2547] dark:text-sky-200 font-bold">
+                      Bloque {selectedBlock}
+                    </span>
+                  )}
+                  {onlyDifficult && (
+                    <span className="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-[#F08519]/25 text-[#D9720E] dark:text-amber-300 font-bold">
+                      Filtro: Solo difíciles
+                    </span>
+                  )}
+                  {isShuffled && (
+                    <span className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-[#0055A5]/30 text-[#0055A5] dark:text-sky-200 font-bold">
+                      Orden aleatorio activo
+                    </span>
+                  )}
+                </div>
+
+                {studyMode === "focus" && filteredVerbs.length > 0 && (
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-extrabold text-[#0F2547] dark:text-white">
+                      Tarjeta {focusIndex + 1} de {filteredVerbs.length} ({progressPercentage}%)
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+
+          {/* ====================================================================
+              ÁREA PRINCIPAL DE ESTUDIO (MODO GRID O MODO FOCUS)
+             ==================================================================== */}
+          <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-grow flex flex-col">
+            {filteredVerbs.length === 0 ? (
+              /* Estado vacío cuando un filtro o búsqueda no tiene coincidencias */
+              <div className="my-auto bg-white dark:bg-[#112445] rounded-3xl border border-slate-200/90 dark:border-slate-700/80 p-8 sm:p-12 text-center max-w-lg mx-auto an-card-shadow">
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-[#0B1830] text-[#0F2547] dark:text-sky-300 flex items-center justify-center mx-auto mb-4 font-black text-xl">
+                  ?
+                </div>
+                <h2 className="text-lg sm:text-xl font-extrabold text-[#0F2547] dark:text-white">
+                  No hay verbos que coincidan con tu filtro actual
+                </h2>
+                <p className="mt-2 text-sm text-slate-500 dark:text-slate-300">
+                  {onlyDifficult && difficultUids.size === 0
+                    ? "Todavía no has marcado ningún verbo con la estrella de 'Difíciles'. Pulsa el icono de estrella en cualquier tarjeta para añadirlo a tu repaso."
+                    : "Prueba a cambiar el texto de búsqueda, seleccionar 'Todos' los bloques o desactivar el filtro de difíciles."}
+                </p>
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="px-4 py-2 rounded-xl bg-[#0055A5] text-white text-xs font-extrabold"
+                    >
+                      Limpiar búsqueda
+                    </button>
+                  )}
+                  {onlyDifficult && (
+                    <button
+                      type="button"
+                      onClick={() => setOnlyDifficult(false)}
+                      className="px-4 py-2 rounded-xl bg-[#F08519] text-white text-xs font-extrabold"
+                    >
+                      Ver todos los verbos
+                    </button>
+                  )}
+                  {selectedBlock !== "all" && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedBlock("all")}
+                      className="px-4 py-2 rounded-xl bg-[#0F2547] dark:bg-sky-600 text-white text-xs font-extrabold"
+                    >
+                      Mostrar los 5 bloques
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : studyMode === "grid" ? (
+              /* ================================================================
+                 VISTA 1: MODO GRID (Cuadrícula responsive)
+                 ================================================================ */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 items-start">
+                {filteredVerbs.map(verb => (
+                  <VerbFlashcard
+                    key={verb.uid}
+                    verb={verb}
+                    isDifficult={difficultUids.has(verb.uid)}
+                    onToggleDifficult={handleToggleDifficult}
+                    onSpeakAll={handleSpeakAllForms}
+                    onSpeakSingle={handleSpeakSingleForm}
+                    isFocusMode={false}
+                  />
+                ))}
+              </div>
+            ) : (
+              /* ================================================================
+                 VISTA 2: MODO FOCUS (Tarjeta individual ampliada y controles)
+                 ================================================================ */
+              <div className="my-auto py-2 flex flex-col items-center justify-center w-full max-w-2xl mx-auto space-y-5">
+                
+                {/* Barra de progreso de navegación de la lista activa */}
+                <div className="w-full space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-extrabold">
+                    <span className="text-slate-500 dark:text-slate-300 uppercase tracking-wider">
+                      Posición en lista actual
+                    </span>
+                    <span className="text-[#0F2547] dark:text-white font-mono text-sm">
+                      {focusIndex + 1} / {filteredVerbs.length}
+                    </span>
+                  </div>
+                  <div className="w-full h-2.5 bg-slate-200/80 dark:bg-[#152C52] rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-[#0055A5] to-[#28A86B] transition-all duration-300 rounded-full"
+                      style={{ width: `${progressPercentage}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* Tarjeta Individual Focus */}
+                {currentFocusVerb && (
+                  <VerbFlashcard
+                    key={currentFocusVerb.uid}
+                    verb={currentFocusVerb}
+                    isDifficult={difficultUids.has(currentFocusVerb.uid)}
+                    onToggleDifficult={handleToggleDifficult}
+                    onSpeakAll={handleSpeakAllForms}
+                    onSpeakSingle={handleSpeakSingleForm}
+                    isFocusMode={true}
+                    externalFlipTrigger={keyboardFlipCount}
+                  />
+                )}
+
+                {/* Controles táctiles grandes para Anterior / Audio / Difícil / Siguiente */}
+                <div className="w-full max-w-lg grid grid-cols-4 gap-2.5 sm:gap-3 pt-1">
+                  <button
+                    type="button"
+                    onClick={handlePrevFocus}
+                    className="col-span-1 py-3.5 px-3 rounded-2xl bg-white dark:bg-[#112445] hover:bg-slate-50 dark:hover:bg-[#162E57] text-[#0F2547] dark:text-white border border-slate-200/90 dark:border-slate-700 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1 an-card-shadow active:scale-95 transition"
+                    aria-label="Verbo anterior"
+                  >
+                    <ChevronLeftIcon className="w-5 h-5" />
+                    <span className="hidden sm:inline">Anterior</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => currentFocusVerb && handleSpeakAllForms(currentFocusVerb)}
+                    className="col-span-1 py-3.5 px-3 rounded-2xl bg-[#0055A5]/10 dark:bg-[#0055A5]/30 hover:bg-[#0055A5] dark:hover:bg-[#0055A5] text-[#0055A5] dark:text-sky-200 hover:text-white border border-[#0055A5]/25 dark:border-sky-400/30 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 active:scale-95 transition"
+                    aria-label="Escuchar las 3 formas"
+                  >
+                    <SpeakerIcon className="w-5 h-5" />
+                    <span>Audio</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => currentFocusVerb && handleToggleDifficult(currentFocusVerb.uid)}
+                    className={`col-span-1 py-3.5 px-3 rounded-2xl border font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 active:scale-95 transition ${
+                      currentFocusVerb && difficultUids.has(currentFocusVerb.uid)
+                        ? "bg-[#F08519] border-[#F08519] text-white"
+                        : "bg-white dark:bg-[#112445] border-slate-200/90 dark:border-slate-700 text-[#0F2547] dark:text-white hover:bg-amber-50/60 dark:hover:bg-[#162E57]"
+                    }`}
+                    aria-label="Marcar o desmarcar como difícil"
+                  >
+                    <StarIcon
+                      className="w-5 h-5"
+                      filled={Boolean(currentFocusVerb && difficultUids.has(currentFocusVerb.uid))}
+                    />
+                    <span>Difícil</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleNextFocus}
+                    className="col-span-1 py-3.5 px-3 rounded-2xl bg-[#0055A5] hover:bg-[#0F2547] dark:hover:bg-sky-500 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1 shadow-md shadow-[#0055A5]/25 active:scale-95 transition"
+                    aria-label="Siguiente verbo"
+                  >
+                    <span className="hidden sm:inline">Siguiente</span>
+                    <ChevronRightIcon className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Ayuda de atajos de teclado en ordenadores */}
+                <div className="hidden md:flex items-center justify-center gap-6 text-[11px] font-bold text-slate-400 dark:text-slate-400 pt-1">
+                  <span className="flex items-center gap-1.5">
+                    <kbd className="px-2 py-0.5 bg-white dark:bg-[#112445] border border-slate-200 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-sm">←</kbd>
+                    <span>Anterior</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <kbd className="px-2 py-0.5 bg-white dark:bg-[#112445] border border-slate-200 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-sm">Espacio</kbd>
+                    <span>Girar tarjeta</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <kbd className="px-2 py-0.5 bg-white dark:bg-[#112445] border border-slate-200 dark:border-slate-700 rounded-md text-slate-600 dark:text-slate-300 shadow-sm">→</kbd>
+                    <span>Siguiente</span>
+                  </span>
+                </div>
+              </div>
+            )}
+          </main>
+
+          {/* ====================================================================
+              PIE DE PÁGINA CORPORATIVO (AULA NEXT ESO)
+             ==================================================================== */}
+          <footer className="mt-10 bg-white dark:bg-[#0E1E3B] border-t border-slate-200/80 dark:border-slate-800 py-6 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <div className="flex items-center gap-3">
+                <span className="font-extrabold text-[#0F2547] dark:text-white">{BRAND_CONFIG.name}</span>
+                <span>·</span>
+                <span>105 VERBOS · LISTA OFICIAL DE INGLÉS (1.º ESO)</span>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <a
+                  href={BRAND_CONFIG.phoneHref}
+                  className="hover:text-[#0055A5] dark:hover:text-sky-300 transition flex items-center gap-1"
+                >
+                  <span>📞</span>
+                  <span>{BRAND_CONFIG.phone}</span>
+                </a>
+                <a
+                  href={BRAND_CONFIG.emailHref}
+                  className="hover:text-[#0055A5] dark:hover:text-sky-300 transition flex items-center gap-1"
+                >
+                  <span>✉️</span>
+                  <span>{BRAND_CONFIG.email}</span>
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
